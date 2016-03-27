@@ -7,7 +7,7 @@ ADD install/ /install
 WORKDIR /install
 RUN build.sh
 
-VOLUME /var/taskd
+VOLUME /home/task/data
 
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /install
