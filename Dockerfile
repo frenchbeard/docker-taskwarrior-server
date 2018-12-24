@@ -1,13 +1,24 @@
-FROM phusion/baseimage:0.9.18
-MAINTAINER frenchbead <frenchbeardsec@gmail.com>
+FROM alpine:3.6
+MAINTAINER frenchbead <frenchbeard@protonmail.com>
 
-CMD ["/sbin/init"]
+ENV TASKD_VERSION=1.1.0 \
+    TASKD_USER="task" \
+    TASKD_HOME="/home/task"
 
-ADD install/ /install
-WORKDIR /install
-RUN build.sh
+ENV TASKD_DATA_DIR="${TASKD_HOME}/data" \
+    TASKD_LOG_DIR="${TASKD_HOME}/log" \
+    TASKD_INSTALL_DIR="${TASKD_HOME}/install" \
+    TASKD_CACHE_DIR="${TASKD_HOME}/cache" \
+    TASKD_RUNTIME_DIR="${TASKD_HOME}/run/"
 
-VOLUME /home/task/data
+RUN apk add --no-cache taskd taskd-pki bash
 
-RUN apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /install
+ADD install/ ${TASKD_INSTALL_DIR}
+RUN ${TASKD_INSTALL_DIR}/build.sh
+
+WORKDIR ${TASKD_HOME}
+VOLUME ${TASKD_HOME}
+
+EXPOSE 53589
+ENTRYPOINT ["${TASKD_RUNTIME_DIR}/run.sh"]
+CMD ["start"]

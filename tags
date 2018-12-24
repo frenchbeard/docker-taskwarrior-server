@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/3bc6a66f/
+NAME	Makefile	/^NAME = $(USER)\/taskd$/;"	m
+VERSION	Makefile	/^VERSION = 0.1.0$/;"	m
+all	Makefile	/^all: build$/;"	t
+build	Makefile	/^build:$/;"	t
+build_nocache	Makefile	/^build_nocache:$/;"	t
+exec_as	install/functions.src.sh	/^exec_as() {$/;"	f
+help	Makefile	/^help:$/;"	t
+logs	Makefile	/^logs:$/;"	t
+purge	Makefile	/^purge: stop$/;"	t
+quickstart	Makefile	/^quickstart:$/;"	t
+release	Makefile	/^release: build tag_latest$/;"	t
+stop	Makefile	/^stop:$/;"	t
+tag_latest	Makefile	/^tag_latest:$/;"	t
+ver_cmp	install/functions.src.sh	/^ver_cmp() {$/;"	f

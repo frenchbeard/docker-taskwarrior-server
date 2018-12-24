@@ -1,0 +1,6 @@
+#! /bin/bash
+
+DEBUG=${DEBUG:-$DEBUG_ENTRYPOINT}
+
+# TASKD
+TASKD_

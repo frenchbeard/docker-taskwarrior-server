@@ -1,23 +1,13 @@
-#! /bin/bash -x
+#! /bin/sh -x
+set -e
 
 # Adding user task to run server
-useradd -U -m -s /bin/bash task
+adduser -h ${TASKD_HOME} -D -s /bin/bash ${TASKD_USER}
 
-# Installing necessary package to build
-apt-get update \
-    && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
-apt-get install curl uuid-dev make cmake gcc g++ libgnutls-dev
+# Installing necessary package to run
+apk update
+apk add --no-cache taskd taskd-pki
 
-# Taskd build
-curl -O https://taskwarrior.org/download/taskd-1.1.0.tar.gz \
-    && tar xzf taskd-1.1.0.tar.gz \
-    && cd taskd-1.1.0 \
-    || exit 1
-
-cmake -DCMAKE_BUILD_TYPE=release . \
-    && make \
-    && make install
-
-mkdir -p /etc/service/taskd
-mv ./run.sh /etc/service/taskd/run
-chmod u+x /etc/service/taskd/run
+mdkdir -p ${TASKD_HOME}/{install,data,log,cache,run}
+mv ./run.sh ${TASKD_RUNTIME_DIR}/
+chmod 700 ${TASKD_RUNTIME_DIR}/run.sh
