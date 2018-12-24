@@ -1,0 +1,206 @@
+1.1.0 (2015-05-10) -
+
+- #1497 taskd ignores the host definition and always listens on 0.0.0.0
+- #1503 build failure with musl libc due to undefined GLOB_BRACE and GLOB_TILDE
+        (thanks to Natanael Copa).
+- #1511 sync init crashes if client certification file is empty or invalid
+        (thanks to Marton Suranyi).
+- TW-1296 make test/run_all exit with non-zero code if a test fail (thanks to
+          Jakub Wilk).
+- TW-1304 Minor build and install fix for NetBSD (thanks to atomicules).
+- TW-1366 In diagnostics it's called 'Cert', and in config it's called
+          'certificate' (thanks to Jack).
+- TD-8 Statistics not working via client (thanks to Alexander Sulfrian).
+- TD-37 Segfault when specifying '--data' with no path (thanks to iron_houzi).
+- TD-39 Documents refer to "modification" and "modified" dates, need to
+        collapse to one (thanks to jck).
+- TD-41 Systemd 'taskd.service' script (thanks to Ralph Bean, Roman
+        Inflianskas).
+- TD-42 Cannot compile taskd - GNUTLS_VERSION undefined in diag.cpp (thanks
+        to Michele Vetturi).
+- TD-45 Fix preprocessor define (thanks to Jochen Sprickerhof).
+        (thanks to Anton Khirnov, Renato Alves).
+- TD-46 gnutls: -54 Error in the pull function.
+- TD-48 Empty username is not an error (thanks to Ben Boeckel).
+- TD-51 Taskd should listen on all matching adresses and interfaces (thanks to
+        Anatolij Zelenin).
+- TD-53 Log message when server is ready for action (thanks to Renato Alves).
+- TD-54 Usage of flock() prevents compilation on Solaris (thanks to Tatjana
+        Heuser).
+- TD-55 TLSServer/Client need to include <errno.h> on Solaris (thanks to
+        Tatjana Heuser).
+- TD-56 File.cpp needs to include <string.h> on Solaris (thanks to Tatjana
+        Heuser).
+- TD-57 taskdctl script assumes /bin/sh is /bin/bash (thanks to Tatjana
+        Heuser).
+- TD-58 "Config file /var/taskd/config modified" message even when the file is
+        not writable (thanks to Alexey Kotlyarov).
+- TD-59 Taskd segfaults when syncing task whose annotations value is not a json
+        array (thanks to Felix Martin).
+- TD-60 Make PKI scripts easier to use (thanks to viq).
+- TD-61 README.md has broken links (thanks to Jack).
+- TD-63 Support logging to stdout when running in foreground mode. (thanks to
+        Christian Kampka).
+- TD-66 No reason given for sync failure when the cause is client.allow
+        mismatch (thanks to Jack).
+- TD-68 Error: Handshake has failed (A TLS packet with unexpected length was
+        received.) (thanks to Jack, Mario, Joao Santos).
+- TD-72 Taskd appears to log everything at the end of a sync (thanks to Jack).
+- TD-74 Taskd transforms integer values into double strings (thanks to Anatolij
+        Zelenin).
+- TD-75 Fix status_statistics (thanks to Jack).
+- TD-78 Create the x509 PKI with a proper CN and don't use SubjectAlternativeName
+        (SANs) (thanks to Louis Opter).
+- TD-79 Bad error message for wrong hostname configuration (thanks to Jens
+        Erat).
+- TD-87 Error 500: Priority values may be 'H', 'M' or 'L', not '' (thanks to
+        Karsten Krohn).
+- TD-89 No man page for Taskctl (thanks to Jack Laxson).
+- TD-92 »taskd config« only checks the end of the key when changing config
+        entries (thanks to Dominik Heidler).
+- 'validate' command will parse/validate a JSON string or file.  Used for
+  debugging Taskserver clients.
+- CRL cert is now optional (thanks to Anton Khirnov).
+- Improved support for IPv6 host names (thanks to Anton Khirnov).
+- When '--data' is specified, the 'diagnostics' command shows more details.
+- Documentation corrections.
+- Added certificate verification to GnuTLS versions < 2.9.10 (thanks to
+  Alexander Sulfrian)
+- Includes line numbers when reporting parse errors in data (thanks to Kosta
+  Harlan).
+- Removed debug output.
+- Updated URLs.
+- Improved I/O performance with better defaults for buffer sizes.
+- Can log to STDOUT when configuration setting 'log' is set to '-'.
+- Removed support for client.allow/client.deny settings.
+- Corrected pki scripts use of '--bits' option (thanks to Pierre Calligaro).
+- Server now supports a configuration setting 'trust', which can be either
+  'strict' or 'allow all', and defaults to 'strict'.
+- If the 'trust' setting contains a bad value, the 'diag' command will
+  indicate this, and the server will log it.
+- Removed linking of pthreads.
+- 'trust' is now given a default 'strict' on config initialization
+- Fixed several issues with scripts/setup_server.bash when folders contain
+  spaces or relative paths are used
+
+------- current release ---------------------------
+
+1.0.0 (2014-01-15) 3a2142f2708bad9ffad9f70ab4b163de2068e6c7
+
+- #1408 Denial of Service Vulnerability in taskd (thanks to Yves Agostini).
+- #1448 specify secure ssl cipher list for tls connection (thanks to Zed
+        Jorarard).
+- #1480 Taskd segmentation fault on sync with Mirakel (thanks to Titus Stahl).
+- Skipped tests that fail for root (thanks to Patrick R McDonald).
+- Added socket shutdown (thanks to Yves Agostini).
+- Removed need for PATH_MAX (thanks to Jakub Wilk).
+- Changed name to 'Taskserver'.
+- Minor documentation corrections.
+
+------- old release ---------------------------
+
+1.0.0.beta2 (2013-11-03)
+
+- #1397 existing org folder breaks init action in taskd (thanks to Axel
+        Gschaider).
+- #1398 man and help pages are different concerning $TASKDATA (thanks to Axel
+        Gschaider).
+- #1434 Taskd client spec: unknown field MUST vs SHALL (thanks to Profpatsch).
+- #1435 Type of “modification” field is not clear (thanks to Profpatsch).
+- Fixed portability (thanks to qbit).
+- Fixed demo documentation (thanks to Rainer Müller).
+- Improved test suite.
+- Server now requires the client to provide a cert, and validates it.
+- Server allows an optional 'ca.cert' setting to specify the CA cert when the
+  'server.cert' is self-signed.
+
+1.0.0.beta1 (2013-09-08)
+
+- #1287 'taskd config' ignored $TASKDDATA.
+- #1289 The 'init' command no longer defaults the 'server' variable, and
+        provides feedback when it is not specified.
+- #1290 The pki/generate.client script now takes an argument is used to name
+        the files.
+- #1291 The 'taskdctl' script needs to use TASKDDATA for config command.
+- #1292 Allow --data as an arg to taskd, not just the command.
+- #1293 The operation.txt document details client.allow, client.deny.
+- #1294 SIGHUP now forces a server config file reload.
+- #1295 Relaxed message parsing slightly.
+- #1296 Now uses permiѕsions 0600 and 0700 when creating files and directories.
+- #1299 Now properly counts bytes sent back to client.
+- #1300 Encode/decode pairing is now properly balanced.
+- #1305 Commit should be available from 'git archive' tarballs (thanks to Ben
+        Boeckel).
+- #1306 Server never seems to sends a 201, always 200.
+- Improved error handling for unrecognized requests.
+- Improved test suite for Cygwin.
+- Improved log entries, for brevity and clarity.
+- Improved log entries for performance characterization.
+- Added statistics for orgs, users and data size.
+- Added data profiling script.
+- Now requires libuuid.
+- Restructured the data root so that users are made unique by a UUID.
+- Implemented org-level redirects.
+- Documented redirects.
+- PKI examples can now use gnutls-certtool otherwise certtool.
+
+1.0.0.alpha (2013-06-23)
+
+- Supports CRL (Certificate Revocation List).
+- Supports new user key generation.
+- Documentation for:
+    - operations
+    - writing a client
+    - task data interchange format
+    - Taskserver protocol
+    - sync algorithm
+    - taskd.1 man page
+    - taskdrc.5 man page
+    - PKI
+- Supports 'client.allow' and 'client.deny' lists.
+- Client interface now an optional feature.
+
+0.12.0 (2013-06-03
+
+- Added IP logging option.
+- JSON support.
+
+0.11.0 (2013-05-18)
+
+- Implemented 'config' command.
+- Implemented 'remove' command.
+- Supports $TASKDDATA in config command.
+- Improved demo scripts and documentation.
+- Consistent use of command line options for all commands.
+
+0.10.0 (2013-05-12)
+
+- Full TLS support, for encrypted-only communication.
+- Added 'diagnostics' command.
+- Bug: Statistics 'tps' value now floating point.
+
+0.9.0 (2012-10-16)
+
+- IPv4 and IPv6 support.
+- Sync use cases and test.
+
+0.8.0 (2012-10-11)
+
+- Functioning sync algorithm.
+- Initial documentation.
+- Demo scripts (early unit tests).
+
+0.7.0 (2012-09-30)
+
+- Added program shell.
+- Added SSL support.
+- Added server command, responding to 'statistics' and 'sync' requests.
+- Added debug 'client' command.
+- Added 'add' command.
+- Equalled functionality of original codebase.
+
+Project restarted 2012-09-26
+Project started 2010-09-22
+
+------ start -------------------------------------
+

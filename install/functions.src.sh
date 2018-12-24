@@ -4,9 +4,6 @@
 # vim: set sw=4 ts=4 sts=4 tw=78 ft=sh foldmarker={{{,}}} foldmethod=marker :
 # }}}
 
-set -e
-source ${TASKD_RUNTIME_DIR/default_env}
-
 # {{{ ver_cmp : Compares two version strings `a` and `b`
 # Expected version format for a and b : X[.X[.X[.X]]]
 # Returns
@@ -24,10 +21,10 @@ ver_cmp() {
 ## {{{ exec_as : Execute a command as TASKD_USER
 # Returns command returned by the execution
 exec_as() {
-  if [[ $(whoami) == ${GITLAB_USER} ]]; then
+  if [[ $(whoami) == ${TASKD_USER} ]]; then
     $@
   else
-    sudo -HEu ${GITLAB_USER} "$@"
+    sudo -HEu ${TASKD_USER} "$@"
   fi
 }
 # }}}
