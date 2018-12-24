@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+    taskd:
+        restart: on-failure:5
+        image: frenchbeard/docker-taskd:0.1.0
+        volumes:
+            - ./task_home:/home/task
+
+        environment:
+            - TASKD_USER=task
+            - TASKD_HOME=/home/task
+            - TASKD_DATA_DIR=${TASKD_HOME}/data
+            - TASKD_LOG_DIR=${TASKD_HOME}/log
+            - TASKD_CERTS_DIR=${TASKD_HOME}/server_certs
+            - TASKD_CLIENTS_DIR=${TASKD_HOME}/client_certs
+            - TASKD_RUNTIME_DIR=${TASKD_HOME}/run
+            - TASKD_INSTALL_DIR=/install
+            - TASKD_SERVER=task.localhost
+            - TASKD_PORT=53589
+            - TASKD_DEFAULT_ORG=Default organization
+            - TASKD_DEFAULT_GROUP=Default group
+            - TASKD_DEFAULT_USER=user
+
+            - BITS=4096
+            - EXPIRATION_DAYS=365
+            - ORGANIZATION=Default organization
+            - CN=task.localhost
+            - COUNTRY=France
+            - STATE=Britanny
+            - LOCALITY=Rennes
