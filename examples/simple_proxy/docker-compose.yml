@@ -1,12 +1,19 @@
 version: '2'
 
 services:
+    nginx:
+        restart: on-failure:5
+        image: nginx:alpine
+        volumes:
+            - ./conf:/etc/nginx
+        ports:
+            - "127.0.0.1:53589:53589"
     taskd:
         restart: on-failure:5
         image: frenchbeard/docker-taskd:0.1.0
         volumes:
             - ./task_home:/home/task
-
+            - /etc/hosts:/etc/hosts:ro
         environment:
             - TASKD_USER=task
             - TASKD_HOME=/home/task

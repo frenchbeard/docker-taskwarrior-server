@@ -1,18 +1,12 @@
 version: '2'
 
 services:
-    nginx:
-        restart: on-failure:5
-        image: nginx:alpine
-        volumes:
-            - ./conf:/etc/nginx
-        ports:
-            - "127.0.0.1:53589:53589"
     taskd:
         restart: on-failure:5
         image: frenchbeard/docker-taskd:0.1.0
         volumes:
-            - ./task_home:/home/task
+            - ./taskd_home:/home/task
+
         environment:
             - TASKD_USER=task
             - TASKD_HOME=/home/task
@@ -21,7 +15,7 @@ services:
             - TASKD_CERTS_DIR=${TASKD_HOME}/server_certs
             - TASKD_CLIENTS_DIR=${TASKD_HOME}/client_certs
             - TASKD_RUNTIME_DIR=${TASKD_HOME}/run
-            - TASKD_INSTALL_DIR=/install
+            - TASKD_INSTALL_DIR=${TASKD_HOME}/install
             - TASKD_SERVER=task.localhost
             - TASKD_PORT=53589
             - TASKD_DEFAULT_ORG=Default organization

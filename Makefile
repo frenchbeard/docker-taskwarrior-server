@@ -11,12 +11,16 @@ help:
 	@echo "-- Help Menu"
 	@echo ""
 	@echo "   1. make build        - build the taskd image"
-	@echo "   2. make tag_latest   - tag the latest build \"latest\""
+	@echo '   2. make tag_latest   - tag the latest build "latest"'
 	@echo "   3. make release      - release the latest build on docker hub"
-	@echo "   4. make quickstart   - start taskd"
+	@echo "   4. make test         - run testing local session"
+	@echo '                          -> mounts to $(shell pwd)/taskd_home'
+	@echo '                          -> "resets" folder hierarchy and permissions if required'
+	@echo '                          -> is removed when stopped'
 	@echo "   5. make stop         - stop taskd"
 	@echo "   6. make logs         - view logs"
-	@echo "   7. make purge        - stop and remove the container"
+	@echo "--"
+	@echo "For production, a docker-compose.yml is provided."
 
 build:
 	docker build -t $(NAME):$(VERSION) --rm .
@@ -30,14 +34,8 @@ tag_latest:
 release: build tag_latest
 	docker push $(NAME)
 
-quickstart:
-	@echo "Starting taskd container..."
-	@docker run --name='taskd-demo' -d \
-		--publish=53589:53589 $(NAME):$(VERSION)
-	@echo "Please be patient. This could take a while..."
-	@echo "taskd will be available at http://localhost:53589"
-	@echo "Type 'make logs' for the logs"
-
+test: build
+	./test.sh
 stop:
 	@echo "Stopping taskd..."
 	@docker stop taskd-demo >/dev/null

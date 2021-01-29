@@ -1,2 +1,4 @@
-proxy_workdir/
+data/
+taskd_home/
+task_home/
 tags
